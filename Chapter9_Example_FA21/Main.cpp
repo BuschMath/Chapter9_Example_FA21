@@ -1,44 +1,33 @@
 #include <iostream>
-#include <string>
 
 using namespace std;
 
-string global_var;
-string conflict_var;
-
-void FunctionA(string);
-void FunctionB();
+void ExampleFunction();
+void Function();
 
 int main()
 {
-	string main_local_var = "\tMain Var\n";
-	global_var = "\tGlobal Var\n";
-	conflict_var = "\tMain Conflict Var\n";
-
-	cout << "Main:\n" << main_local_var << global_var << conflict_var;
-
-	FunctionA(main_local_var);
-
-	cout << "Main:\n" << main_local_var << conflict_var;
-
-	FunctionB();
+	for (int i = 0; i <= 10; i++)
+	{
+		ExampleFunction();
+		Function();
+	}
 
 	return 0;
 }
 
-void FunctionA(string copy_main_local_var)
+void ExampleFunction()
 {
-	copy_main_local_var = "\tCopy of Main changed\n";
-	string conflict_var = "\tLocal Conflict, not global\n";
-	string local_a = "\tLocal A\n";
+	static int counter = 0;
 
-	cout << "A:\n" << local_a << copy_main_local_var << conflict_var;
+	counter += 3;
+	cout << "Count: " << counter << endl;
 }
 
-void FunctionB()
+void Function()
 {
-	string main_local_var = "\tMain Local B\n";
-	string local_b = "\tLocal B\n";
+	int counter = 0;
 
-	cout << "B:\n" << local_b << main_local_var << conflict_var;
+	counter += 4;
+	cout << "A Count: " << counter << endl;
 }
